@@ -69,6 +69,9 @@ private:
     QHBoxLayout *hangmanLayout;
     void reset();
     void resizeEvent(QResizeEvent* event);
+    QDialog* exitDialog;
+    QLabel* exitLabel;
+    QHBoxLayout *exitLayout;
 
 public:
     void GuessLetter(Button* button);

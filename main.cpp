@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     Dialog w;
     QObject::connect(qApp, SIGNAL(lastWindowClosed()), qApp, SLOT(quit()));
     w.showMaximized();
-    w.show();
+    //w.show();
 
     return a.exec();
 }

@@ -9,6 +9,7 @@ Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
+
     newGame();
 }
 
@@ -87,13 +88,26 @@ void Dialog::reset()
 
 void Dialog::createGameOver()
 {
+
+
+    exitDialog = new QDialog(this);
+    exitLayout = new QHBoxLayout(exitDialog);
+    exitLabel = new QLabel("Game Over", exitDialog);
+    exitLabel->setSizePolicy(QSizePolicy::Maximum,QSizePolicy::Maximum);
+    exitLabel->setFont(QFont("Chalkduster", 50));
+
+    //exitLabel->setStyleSheet(" color:white ");
+
+    exitLayout->addWidget(exitLabel);
+    exitLayout->setAlignment(exitLabel, Qt::AlignCenter);
+    qDebug()<<exitLabel->height()<<"*"<<exitLabel->width();
     gameOver = new QMessageBox(this);
     gameOver->setText("Sorry you ran out of guesses. The word was "+chosenWord);
     gameOver->addButton(QMessageBox::Close);
     //gameOver->addButton(QMessageBox::Reset);
     //gameOver->button(QMessageBox::Reset)->setText("New Game");
     gameOver->setIcon(QMessageBox::Warning);
-    connect(gameOver->button(QMessageBox::Close),SIGNAL(clicked()),qApp,SLOT(quit()));
+    //connect(gameOver->button(QMessageBox::Close),SIGNAL(clicked()),QApplication::instance(),SLOT(quit()));
     //connect(gameOver->button(QMessageBox::Reset),SIGNAL(clicked()),this,SLOT(reset()));
 }
 
@@ -169,7 +183,7 @@ void Dialog::createGameWon()
     //gameWon->button(QMessageBox::Reset)->setText("New Game");
     gameWon->setIcon(QMessageBox::Information);
 
-    connect(gameWon->button(QMessageBox::Close),SIGNAL(clicked()),this,SLOT(close()));
+    //connect(gameWon->button(QMessageBox::Close),SIGNAL(clicked()),this,SLOT(close()));
     //connect(gameWon->button(QMessageBox::Reset),SIGNAL(clicked()),this,SLOT(newGame()));
 }
 
@@ -183,6 +197,8 @@ void Dialog::slotButtonClicked()
     if(guessesLeft==0)
     {
         gameOver->exec();
+        exitDialog->showMaximized();
+        this->hide();
     }
     else if(isGameWon())
     {
@@ -279,4 +295,5 @@ void Dialog::resizeEvent(QResizeEvent* event)
 {
    QDialog::resizeEvent(event);
    UpdateLabels();
+
 }
