@@ -165,12 +165,12 @@ void Dialog::createGameWon()
     gameWon = new QMessageBox(this);
     gameWon->setText("You won");
     gameWon->addButton(QMessageBox::Close);
-    gameWon->addButton(QMessageBox::Reset);
-    gameWon->button(QMessageBox::Reset)->setText("New Game");
+    //gameWon->addButton(QMessageBox::Reset);
+    //gameWon->button(QMessageBox::Reset)->setText("New Game");
     gameWon->setIcon(QMessageBox::Information);
 
     connect(gameWon->button(QMessageBox::Close),SIGNAL(clicked()),this,SLOT(close()));
-    connect(gameWon->button(QMessageBox::Reset),SIGNAL(clicked()),this,SLOT(newGame()));
+    //connect(gameWon->button(QMessageBox::Reset),SIGNAL(clicked()),this,SLOT(newGame()));
 }
 
 void Dialog::slotButtonClicked()
@@ -275,3 +275,8 @@ void Dialog::newGame()
     createGameWon();
 }
 
+void Dialog::resizeEvent(QResizeEvent* event)
+{
+   QDialog::resizeEvent(event);
+   UpdateLabels();
+}

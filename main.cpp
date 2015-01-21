@@ -5,6 +5,8 @@
 
 int main(int argc, char *argv[])
 {
+
+
     QApplication a(argc, argv);
     Dialog w;
     QObject::connect(qApp, SIGNAL(lastWindowClosed()), qApp, SLOT(quit()));

@@ -68,6 +68,7 @@ private:
     QList<QString> *lettersGuessed;
     QHBoxLayout *hangmanLayout;
     void reset();
+    void resizeEvent(QResizeEvent* event);
 
 public:
     void GuessLetter(Button* button);
