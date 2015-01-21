@@ -203,6 +203,8 @@ void Dialog::slotButtonClicked()
     else if(isGameWon())
     {
         gameWon->exec();
+        exitDialog->showMaximized();
+        this->hide();
     }
 
 }
